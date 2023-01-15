@@ -23,6 +23,7 @@ function Home() {
 
   const searchHandler = (q) => {
     setQuery(q);
+    setPage(1);
   };
 
   return (
@@ -46,7 +47,7 @@ function Home() {
           )}
         />
         <Pagination
-          defaultPage={page}
+          page={page}
           onChange={handleChange}
           count={Math.ceil(
             jobData.filter((job) =>
