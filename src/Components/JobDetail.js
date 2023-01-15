@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Dialog, ListSubheader } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
+
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useLocation } from "react-router-dom";
@@ -16,16 +16,15 @@ function JobDetail() {
   const data = state.data;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    document.body.addEventListener("click", (event) => {
-      if (event.path[0].tagName !== "BUTTON") navigate("/", { replace: true });
-    });
+  const closeDetail = (event) => {
+    console.log(event);
+    if (event.path[0].tagName !== "BUTTON") navigate("/", { replace: true });
+  };
 
-    return () =>
-      document.body.removeEventListener("click", (event) => {
-        if (event.path[0].tagName !== "BUTTON")
-          navigate("/", { replace: true });
-      });
+  useEffect(() => {
+    document.body.addEventListener("click", closeDetail);
+
+    return () => document.body.removeEventListener("click", closeDetail);
   }, []);
 
   return (
